@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>select dish</title>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
+</head>
+
+<body id="selectDishView">
+	<h1 class="page-header">Dinner planner - SELECT DISH</h1>
+
+	<div id="dinnerSummaryView" class="sidenav">
+	</div>
+	<div>
+		<div class="topBar">
+			<h3>Find a dish</h3>
+			<input class="marg" id="searchTerms" value="Enter key words"></input>
+			<div class="btn-group dropdown marg" id="dropdownEntries">
+				<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+				 aria-expanded="false">
+					All
+				</button>
+				<div class="dropdown-menu">
+				</div>
+			</div>
+
+
+			<button id="executeSearch" class="btn">Search</button>
+
+		</div>
+
+		<div class="gallery">
+			<div id="dishItemView" class="imageBox"></div>
+		</div>
+
+
+
+	</div>
+	<!-- jQuery, only for use by Bootstrap -->
+	<script src="https://code.jquery.com/jquery.js"></script>
+	<!-- Bootstrap JavaScript, needed if you want for instance tabs, models, popovers etc. -->
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+	<!-- The application JavaScript code -->
+	<script src="js/model/dinnerModel.js"></script>
+
+	<script src="js/selectDishApp.js"></script>
+	<script src="js/view/selectDishView.js"></script>
+	<script src="js/view/dishItemView.js"></script>
+
+	<script src="js/view/dinnerSummaryView.js"></script>
+
+	<!-- TODO: Here you should include JS code for your other views -->
+	<script src="js/view/exampleView.js"></script>
+</body>
+
+</html>

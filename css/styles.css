@@ -1,0 +1,49 @@
+
+html,body{
+    height: 100%;
+}
+
+.red{
+    color: red;
+}
+
+.sidenav{
+    min-width: 100 px;
+    text-align: left;
+    background: lightgrey;
+    padding: 2%;
+    float: left;
+    height:100%;
+    white-space: nowrap;
+}
+
+.floatLeft{
+    float: left;
+}
+
+.floatRight{
+    float: left;
+}
+
+
+.topBar{
+    background: lightsalmon;
+    height:15%;
+
+}
+
+.gallery{
+    background: lightyellow;
+}
+
+.imageBox {
+    border: black;
+    display: inline-block;
+    /* width: 200px;
+    height: 100px; */
+    margin: 1em;
+  }
+
+.marg{
+    margin:5px;
+}
