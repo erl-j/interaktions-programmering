@@ -1,4 +1,4 @@
-Interaction Programing - Lab assignment 2- HTML
+Interaction Programing - Lab assignment 1+2- HTML
 =================================================
 
 # Done:
