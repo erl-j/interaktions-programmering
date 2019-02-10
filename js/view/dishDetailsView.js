@@ -1,28 +1,70 @@
 class DishDetailsView {
-	constructor(container, model) {
+    constructor(container, model) {
 
-		this.container = container;
-		this.model = model;
+        this.id = null;
 
-        this.dishTitle=container.querySelector("#dishTitle");
+        this.container = container;
+        this.model = model;
 
-        this.dishImage=container.querySelector("#dishImage");
+        this.container.innerHTML = `
+        <h3 id="dishTitle"></h3>
+        <div id="dishImage">
+        </div>
+        <p id="dishDescription"></p>
+        <div class="btn-group">
+            <button id="addButton" class="btn btn-secondary">add to menu</button>
+            <button id="backButton" class="btn btn-secondary">back to search</button>
+        </div>
+        `;
 
-        this.dishDescription=container.querySelector("#dishDescription");
+        this.dishTitle = container.querySelector("#dishTitle");
 
-        this.update("1");
+        this.dishImage = container.querySelector("#dishImage");
+
+        this.dishDescription = container.querySelector("#dishDescription");
+
+        this.addButton = container.querySelector("#addButton");
+
+        this.backButton = container.querySelector("#backButton");
     }
-    
-    update(id){
 
-        let dsh=this.model.getDish(id);
-    
-        this.dishTitle.innerHTML=dsh.name;
-
-        this.dishImage.innerHTML="<img src=\"images/"+dsh.image+"\"/>";
-
-        this.dishDescription.innerHTML=dsh.description;
+    hide() {
+        this.container.style.display = "none";
     }
 
-	// in lab 2, the Observer update method will come here
+    show() {
+        this.container.style.display = "initial";
+    }
+
+    set(id) {
+        this.id = id;
+        this.update();
+    }
+
+    update() {
+
+        if (this.id != null) {
+
+            let dsh = this.model.getDish(this.id);
+
+            this.dishTitle.innerHTML = dsh.name;
+
+            this.dishImage.innerHTML = "<img src=\"images/" + dsh.image + "\"/>";
+
+            this.dishDescription.innerHTML = dsh.description;
+        }
+    }
+
+    // in lab 2, the Observer update method will come here
+}
+
+class DishDetailsViewController {
+    constructor(view, model, gsc) {
+        view.backButton.addEventListener("click", () => gsc.showSelectDishScreen());
+        view.addButton.addEventListener("click", () => {
+            model.addDishToMenu(view.id);
+            gsc.showSelectDishScreen();
+        });
+    }
+
 }

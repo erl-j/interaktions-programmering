@@ -1,57 +1,80 @@
-window.onload= function() {
-	//We instantiate our model
-	const model = new DinnerModel();
+class GSC{
+	constructor(model){
+		this.model=model;
+
+		this.homeView = new HomeView(document.querySelector("#homeView"),this.model);
+
+		this.dinnerSummaryView = new DinnerSummaryView(document.querySelector("#dinnerSummaryView"),this.model);
+		this.model.addObserver(this.dinnerSummaryView);
+
+		this.dishDetailsView = new DishDetailsView(document.querySelector("#dishDetailsView"),this.model);
+
+		this.ingredientsView = new IngredientsView(document.querySelector("#ingredientsView"),this.model);
+
+		this.selectDishView= new SelectDishView(document.querySelector("#selectDishView"),this.model);
+		this.model.addObserver(this.selectDishView);
+
+		this.dinnerOverviewView = new DinnerOverviewView(document.querySelector("#dinnerOverviewView"),this.model);
+		this.model.addObserver(this.dinnerOverviewView);
+	}
+
+	initalizeControllers(){
+		this.dinnerSummaryViewController=new DinnerSummaryViewController(this.dinnerSummaryView,this.model,this);
+		this.homeViewController=new HomeViewController(this.homeView,this.model,this);
+		this.selectDishViewController=new SelectDishViewController(this.selectDishView,this.model,this);
+		this.dishDetailsViewController=new DishDetailsViewController(this.dishDetailsView,this.model,this);
+	}
+
+	hideAllViews(){
+		this.homeView.hide();
+		this.dinnerSummaryView.hide();
+		this.ingredientsView.hide();
+		this.selectDishView.hide();
+		this.dishDetailsView.hide();
+		this.dinnerOverviewView.hide();
+	}
+
+	showHomeScreen(){
+		this.hideAllViews();
+		this.homeView.show();
+	}
 	
-	try{
-		const homeView = new HomeView(document.querySelector("#homeView"),model);
-	}
-	catch(error){
-		//console.error(error);
-	}
-
-	try{
-		const dinnerSummaryView = new DinnerSummaryView(document.querySelector("#dinnerSummaryView"),model);
-	}
-	catch(error){
-	//	console.error(error);
+	showSelectDishScreen(){
+		this.hideAllViews();
+		this.dinnerSummaryView.show();
+		this.selectDishView.show();
 	}
 
-	try{
-		const dishDetailsView = new DishDetailsView(document.querySelector("#dishDetailsView"),model);
-	}
-	catch(error){
-		console.error(error);
-	}
-
-	try{
-		const ingredientsView = new IngredientsView(document.querySelector("#ingredientsView"),model);
-	}
-	catch(error){
-		console.error(error);
+	showDishDetailsScreen(id){
+		this.dishDetailsView.set(id);
+		this.hideAllViews();
+		this.dinnerSummaryView.show();
+		this.dishDetailsView.show();
+		this.ingredientsView.show();
 	}
 
-	try{
-		const selectDishView= new SelectDishView(document.querySelector("#selectDishView"),model);
+	showDinnerOverviewScreen(){
+		this.hideAllViews();
+		this.dinnerOverviewView.show();
 	}
-	catch(error){
-	//	console.error(error);
-	}
-
-	try{
-		const dinnerOverviewView = new DinnerOverviewView(document.querySelector("#dinnerOverviewView"),model);
-	}
-	catch(error){
-	//	console.error(error);
-	}
+}
 
 
-	//const exampleView = new ExampleView(document.querySelector("#exampleView"),model);
+window.onload= function() {
 
-	/**
-	 * IMPORTANT: app.js is the only place where you are allowed to
-	 * query for elements in the whole document.
-	 * In other places you should limit the search only to the children 
-	 * of the specific view you're working with (see exampleView.js).
-	 */
+	model=new DinnerModel();
+
+	const gsc=new GSC(model);
+	gsc.initalizeControllers();
+	gsc.showHomeScreen();
 
 };
+
+
+
+
+
+
+
+
+

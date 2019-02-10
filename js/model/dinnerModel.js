@@ -6,11 +6,11 @@ class DinnerModel {
 
 		//TODO Lab 1 implement the data structure that will hold number of guest
 		// and selected dishes for the dinner menu
-		this.nGuests = 3;
+		this.nGuests = 2;
 		this.menu = {
-			'starter': 1,
-			'mainDish': 100,
-			'dessert': 201
+			'starter': null,
+			'main dish': null,
+			'dessert': null
 		};
 
 		this.observers=[];
@@ -20,6 +20,7 @@ class DinnerModel {
 	setNumberOfGuests(num) {
 		//TODO Lab 1
 		this.nGuests = num;
+		this.notifyObservers();
 	}
 
 	getNumberOfGuests() {
@@ -39,7 +40,8 @@ class DinnerModel {
 		//TODO Lab 1
 		let out=[];
 		for(let d in this.menu){
-			if (this.menu.hasOwnProperty(d)){
+			if (this.menu.hasOwnProperty(d) && this.menu[d]!=null){
+
 				out.push(this.getDish(this.menu[d]));
 			}
 		}
@@ -51,7 +53,7 @@ class DinnerModel {
 		//TODO Lab 1
 		let ingredients = [];
 		for (let d in this.menu) {
-			if (this.menu.hasOwnProperty(d)) {
+			if (this.menu.hasOwnProperty(d) && this.menu[d]!=null) {
 				let dshId= this.menu[d];
 				let dsh=this.getDish(dshId);
 				for (let i of dsh['ingredients']) {
@@ -73,6 +75,17 @@ class DinnerModel {
 
 		return price* this.nGuests;
 	}
+
+
+	//function that returns a dish of specific ID
+	getDish(id) {
+		for (let dsh of this.dishes) {
+			if (dsh.id == id) {
+				return dsh;
+			}
+		}
+		return undefined;
+	}
 	
 	//Returns the sum of the price of all ingredients of a dish
 	getDishPrice(id){
@@ -91,7 +104,8 @@ class DinnerModel {
 		//TODO Lab 1 
 		let dish=this.getDish(id);
 		let dishType=dish.type;
-		this.menu.dishType=id;
+		this.menu[dishType]=id;
+		this.notifyObservers();
 	}
 
 	//Removes dish from menu
@@ -103,6 +117,7 @@ class DinnerModel {
 				break; //Stop this loop, we found it!
 			}
 		}
+		this.notifyObservers();
 	}
 
 
@@ -127,17 +142,23 @@ class DinnerModel {
 		});
 	}
 
-	//function that returns a dish of specific ID
-	getDish(id) {
-		for (let dsh of this.dishes) {
-			if (dsh.id == id) {
-				return dsh;
+	searchDishes(filter) {
+		return this.dishes.filter(function (dish) {
+			let found = true;
+			if (filter) {
+				found = false;
+				dish.ingredients.forEach(function (ingredient) {
+					if (ingredient.name.indexOf(filter) != -1) {
+						found = true;
+					}
+				});
+				if (dish.name.indexOf(filter) != -1) {
+					found = true;
+				}
 			}
-		}
-		return undefined;
+			return found;
+		});
 	}
-
-	
 
 	addObserver(obs){
 		this.observers.push(obs)

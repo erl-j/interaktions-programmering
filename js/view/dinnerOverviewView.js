@@ -3,36 +3,61 @@ class DinnerOverviewView {
       this.container = container;
       this.model = model;
 
-      this.numberOfGuests = container.querySelector("#numberOfGuests");
-      this.numberOfGuests.innerHTML = this.model.getNumberOfGuests();
+      this.container.innerHTML = `
+      <div class="topBar">
+					<div>
+						<h2 class="floatLeft marg">
+							My dinner:
+							<span id="numberOfGuests"></span>
+							people
+						</h2>
+						
+					</div>
 
-      this.menuGallery=this.container.querySelector("#menuGallery");
-      
-      this.dishItemViews=[];
+					<button id="backButton" class="btn btn-secondary marg">Go back</button>
+		</div>
+		<div id="menuGallery"></div>
+		<div>
+			<button class="btn btn-secondary">Print full recipe</button>
+		</div>
+      `;
 
-      let fullMenu=model.getFullMenu();
-      let i=0;
-      for(let d of fullMenu){
-         let id=d.id;
-         this.menuGallery.innerHTML+=("<div class=\"imageBox\" id=\"dishItem"+i+"\"></div>");
-         this.dishItemViews.push(new DishItemView(this.container.querySelector("#dishItem"+i),model,id));
-         i++;
-      }
+      this.backButton=this.container.querySelector("#backButton");
+      this.numberOfGuests = this.container.querySelector("#numberOfGuests");
+      this.menuGallery = this.container.querySelector("#menuGallery");
 
-
-      // this.menuGallery.innerHTML=(
-      //    function (){
-      //       let out="";
-      //       let fullMenu=model.getFullMenu();
-      //       for(let d of fullMenu){
-               
-      //          let imStr=d.image;
-      //          out+="<img class=\"imageBox\" src=\"images/"+imStr+"\"/>"; 
-      //       }
-      //       return out;
-
-      //    })();
-
+      this.update();
    }
 
+   update(){
+      this.numberOfGuests.innerHTML = this.model.getNumberOfGuests();
+
+      this.dishItemViews = [];
+      let fullMenu = this.model.getFullMenu();
+      this.menuGallery.innerHTML="";
+
+      let i = 0;
+      for (let d of fullMenu) {
+         let id = d.id;
+         this.menuGallery.innerHTML += ("<div class=\"imageBox\" id=\"dishItem" + i + "\"></div>");
+         this.dishItemViews.push(new DishItemView(this.container.querySelector("#dishItem" + i), this.model, id));
+         i++;
+      }
+   }
+
+   hide() {
+      this.container.style.display = "none";
+   }
+
+   show() {
+      this.container.style.display = "initial";
+   }
+
+}
+
+class DinnerOverviewViewController{
+   DinnerOverviewViewController(view,model,gsc){
+      view.backButton.addEventListener("click",()=>gsc.showSelectDishScreen);
+
+   }
 }

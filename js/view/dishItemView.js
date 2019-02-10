@@ -4,7 +4,6 @@ class DishItemView {
         this.model = model;
 
         this.container.innerHTML = `
-        
         <div class>
             
             <div id="dishCard" class="img-fluid"></div>
@@ -12,19 +11,30 @@ class DishItemView {
             <span id="dishName"></span>
 
         </div>
-            
-  
         `;
 
         this.dishImage = container.querySelector("#dishCard");
         this.dishName = container.querySelector("#dishName");
 
-        let dsh = this.model.getDish(id);
+        this.id=id;
+
+        this.update();
+    }
+
+    update(){
+        let dsh = this.model.getDish(this.id);
         let dshName = dsh.name;
         let imStr = dsh.image;
-        this.dishImage.innerHTML="<img src=\"images/"+imStr+"\"/>";
-        this.dishName.innerHTML=dshName;
-    
+        this.dishImage.innerHTML = "<img src=\"images/" + imStr + "\"/>";
+        this.dishName.innerHTML = dshName;
+    }
+
+    hide() {
+        this.container.style.display = "none";
+    }
+
+    show() {
+        this.container.style.display = "initial";
     }
 
 

@@ -30,17 +30,14 @@ class IngredientsView {
 
         this.totalCost=container.querySelector("#totalCost");
 
-        this.update("1");
+        this.update();
     }
     
-    update(id){
-
+    update(){
+        let id=1;
         let nGuests=this.model.getNumberOfGuests();
-
         this.numberOfGuests.innerHTML=nGuests;
-
         let dsh=this.model.getDish(id);
-
         this.ingredientEntries.innerHTML=(function()
         {
             let out="";
@@ -60,6 +57,14 @@ class IngredientsView {
 
         this.totalCost.innerHTML=this.model.getDishPrice(id);
     }
+
+    hide() {
+        this.container.style.display = "none";
+     }
+  
+     show() {
+        this.container.style.display = "initial";
+     }
 
 	// in lab 2, the Observer update method will come here
 }
