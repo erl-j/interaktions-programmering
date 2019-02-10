@@ -1,14 +1,14 @@
 Interaction Programing - Lab assignment 2- HTML
 =================================================
 
-#Done:
+# Done:
 -Implemented all views except printout.
 
 -Observer pattern implemented.
 
 -Interactivity.
 
-#TODO:
+# TODO:
 
 -Implement category search on select dish
 
