@@ -10,6 +10,7 @@ class GSC{
 		this.dishDetailsView = new DishDetailsView(document.querySelector("#dishDetailsView"),this.model);
 
 		this.ingredientsView = new IngredientsView(document.querySelector("#ingredientsView"),this.model);
+		this.model.addObserver(this.ingredientsView);
 
 		this.selectDishView= new SelectDishView(document.querySelector("#selectDishView"),this.model);
 		this.model.addObserver(this.selectDishView);
@@ -23,6 +24,7 @@ class GSC{
 		this.homeViewController=new HomeViewController(this.homeView,this.model,this);
 		this.selectDishViewController=new SelectDishViewController(this.selectDishView,this.model,this);
 		this.dishDetailsViewController=new DishDetailsViewController(this.dishDetailsView,this.model,this);
+		this.dinnerOverviewViewController=new DinnerOverviewViewController(this.dinnerOverviewView,this.model,this);
 	}
 
 	hideAllViews(){
@@ -47,6 +49,7 @@ class GSC{
 
 	showDishDetailsScreen(id){
 		this.dishDetailsView.set(id);
+		this.ingredientsView.set(id);
 		this.hideAllViews();
 		this.dinnerSummaryView.show();
 		this.dishDetailsView.show();

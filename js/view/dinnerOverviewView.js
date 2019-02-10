@@ -56,8 +56,8 @@ class DinnerOverviewView {
 }
 
 class DinnerOverviewViewController{
-   DinnerOverviewViewController(view,model,gsc){
-      view.backButton.addEventListener("click",()=>gsc.showSelectDishScreen);
+   constructor(view,model,gsc){
+      view.backButton.addEventListener("click",()=>gsc.showSelectDishScreen());
 
    }
 }

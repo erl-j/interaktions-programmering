@@ -1,10 +1,10 @@
 class IngredientsView {
-	constructor(container, model) {
+    constructor(container, model) {
 
-		this.container = container;
+        this.container = container;
         this.model = model;
-        
-        this.container.innerHTML=`
+
+        this.container.innerHTML = `
         <div class="panel panel_default">
             <div class="panel-body">
                 Ingredients for <span id="numberOfGuests"></span> people
@@ -24,47 +24,54 @@ class IngredientsView {
         </div>
         `;
 
-        this.numberOfGuests=container.querySelector("#numberOfGuests");
+        this.numberOfGuests = container.querySelector("#numberOfGuests");
 
-        this.ingredientEntries=container.querySelector("#ingredientEntries");
+        this.ingredientEntries = container.querySelector("#ingredientEntries");
 
-        this.totalCost=container.querySelector("#totalCost");
+        this.totalCost = container.querySelector("#totalCost");
+
+        this.id = null;
 
         this.update();
+
     }
-    
-    update(){
-        let id=1;
-        let nGuests=this.model.getNumberOfGuests();
-        this.numberOfGuests.innerHTML=nGuests;
-        let dsh=this.model.getDish(id);
-        this.ingredientEntries.innerHTML=(function()
-        {
-            let out="";
-            for(let i of dsh.ingredients){
-                out+=`
+
+    set(id) {
+        this.id = id;
+    }
+
+    update() {
+        if (this.id != null) {
+            let nGuests = this.model.getNumberOfGuests();
+            this.numberOfGuests.innerHTML = nGuests;
+            let dsh = this.model.getDish(this.id);
+            this.ingredientEntries.innerHTML = (function () {
+                let out = "";
+                for (let i of dsh.ingredients) {
+                    out += `
                 <tr>
-                    <td>`+i.quantity+`</td>
-                    <td>`+i.unit+`</td>
-                    <td>`+i.name+`</td>
+                    <td>` + i.quantity + `</td>
+                    <td>` + i.unit + `</td>
+                    <td>` + i.name + `</td>
                     <td>SEK</td>
-                    <td>`+i.price*nGuests+`</td>
+                    <td>` + i.price * nGuests + `</td>
                 </tr>              
                 `;
-            }
-            return out;
-        })();
+                }
+                return out;
+            })();
 
-        this.totalCost.innerHTML=this.model.getDishPrice(id);
+            this.totalCost.innerHTML = this.model.getDishPrice(this.id);
+        }
     }
 
     hide() {
         this.container.style.display = "none";
-     }
-  
-     show() {
-        this.container.style.display = "initial";
-     }
+    }
 
-	// in lab 2, the Observer update method will come here
+    show() {
+        this.container.style.display = "initial";
+    }
+
+    // in lab 2, the Observer update method will come here
 }
