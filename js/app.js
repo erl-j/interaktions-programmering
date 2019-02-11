@@ -17,6 +17,8 @@ class GSC{
 
 		this.dinnerOverviewView = new DinnerOverviewView(document.querySelector("#dinnerOverviewView"),this.model);
 		this.model.addObserver(this.dinnerOverviewView);
+
+		this.initalizeControllers();
 	}
 
 	initalizeControllers(){
@@ -68,8 +70,7 @@ window.onload= function() {
 	model=new DinnerModel();
 
 	const gsc=new GSC(model);
-	gsc.initalizeControllers();
-	gsc.showHomeScreen();
+	gsc.showSelectDishScreen();
 
 };
 

@@ -3,17 +3,17 @@ class SelectDishView {
 		this.container = container;
 		this.model = model;
 
-		this.container.innerHTML = `<div>
-		<div class="topBar">
-			<h3>Find a dish</h3>
-			<input class="marg" id="searchTerms" value="Enter key words"></input>
-				<div class="btn-group dropdown marg" id="dropdown">
+		this.container.innerHTML = `
+
+			<div class="stayHigh ">
+				<div class="pb-1 ml-2 border-bottom ">
+					<h4>Find a dish</h4>
+					<div class="input-group">
+						<input id="searchTerms" placeholder="Enter key words"></input>
+					</div>
 				</div>
-				<button id="searchButton" class="btn btn-secondary">Search</button>
+				<div class="scrollable" id="gallery"></div>
 			</div>
-			<div id="gallery">
-			</div>
-		</div>	
 		`;
 
 		//this.dropdown = container.querySelector("#dropdown");
@@ -53,19 +53,26 @@ class SelectDishView {
 class SelectDishViewController {
 	constructor(view, model, gsc) {
 
+		
+
 		var searchAction = () => {
 			view.setGallery(model.searchDishes(view.searchTerms.value));
 		};
 
-		view.searchButton.addEventListener("click",
-			() => searchAction());
+		view.gallery.addEventListener("load",searchAction());
 
-		view.container.addEventListener("keypress",
-			(e) => {
-				if(e.keyCode==13){
-					searchAction();
-				}
-			});
+		// view.searchButton.addEventListener("click",
+		// 	() => searchAction());
+
+		 view.searchTerms.addEventListener("keypress",
+		 	() => searchAction());
+
+		// view.container.addEventListener("keypress",
+		// 	(e) => {
+		// 		if(e.keyCode==13){
+		// 			searchAction();
+		// 		}
+		// 	});
 
 		view.gallery.addEventListener('click', function (event) {
 			if (event.target.tagName == "IMG") {

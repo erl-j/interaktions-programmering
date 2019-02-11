@@ -3,6 +3,25 @@ html,body{
     height: 100%;
 }
 
+.stayHigh{
+    position: absolute;
+    top: 0;
+
+
+}
+
+.description{
+    color:darkgray;
+    position: absolute;
+    top: 30%;
+    margin: auto;
+    padding: 2em;
+}
+
+.scrollable{
+    overflow-y:scoll;
+}
+
 .red{
     color: red;
 }
@@ -22,7 +41,7 @@ html,body{
 }
 
 .floatRight{
-    float: left;
+    float: right;
 }
 
 .topBar{

@@ -3,17 +3,20 @@ class DinnerSummaryView {
 		this.container = container;
 		this.model = model;
 
-		this.container.innerHTML = `<h3>My dinner</h3>
-		<div class="frm-group">
-			People:
-			<span id="numberOfGuests"></span>
-			<div class="btn-group">
-				<button id="minusGuest" class="btn btn-secondary btn-sm">-</span></button>
-				<button id="plusGuest" class="btn btn-secondary btn-sm">+</span></button>
-			</div>
+		this.container.innerHTML = `
+		<div class="ml-2">
+			<h4>My dinner</h4>
+				<h6 class="btn"> 
+					People:
+					<span id="numberOfGuests"></span>
+				</h6>
+				<div class="btn-group">
+					<button id="minusGuest" class="btn btn-outline-dark btn-sm">-</span></button>
+					<button id="plusGuest" class="btn btn-outline-dark btn-sm">+</span></button>
+				</div>
 		</div>
-		<table class="table table-dark">
-			<thead>
+		<table class="table">
+			<thead class="thead-dark">
 				<tr>
 					<th scope="col">Dish name</th>
 					<th scope="col">Cost</th>
@@ -24,11 +27,11 @@ class DinnerSummaryView {
 				<tr>
 					<td></td>
 					<td id="totalCost"></td>
-					<td >:-</td>
+
 				</tr>
 			</tfoot>
 		</table>
-		<button id="confirmDinner" class="btn btn-secondary">Confirm Dinner</button>`;
+		<button id="confirmDinner" class="btn btn-outline-dark btn-block">Confirm Dinner</button>`;
 
 		this.numberOfGuests = container.querySelector("#numberOfGuests");
 		this.totalCost = container.querySelector("#totalCost");

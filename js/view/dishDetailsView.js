@@ -7,13 +7,17 @@ class DishDetailsView {
         this.model = model;
 
         this.container.innerHTML = `
-        <h3 id="dishTitle"></h3>
-        <div id="dishImage">
-        </div>
-        <p id="dishDescription"></p>
-        <div class="btn-group">
-            <button id="addButton" class="btn btn-secondary">add to menu</button>
-            <button id="backButton" class="btn btn-secondary">back to search</button>
+        <div class="ml-2 mr-2">
+            <h4 id="dishTitle"></h4>
+            <p>
+                <div id="dishImage" class="floatRight"></div>
+                <span id="dishDescription"></span>
+            </p>
+
+
+
+                <button id="addButton" class="btn btn-secondary">add to menu</button>
+                <button id="backButton" class="btn btn-secondary">back to search</button>
         </div>
         `;
 

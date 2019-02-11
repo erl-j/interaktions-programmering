@@ -4,20 +4,16 @@ class DinnerOverviewView {
       this.model = model;
 
       this.container.innerHTML = `
-      <div class="topBar">
-					<div>
-						<h2 class="floatLeft marg">
-							My dinner:
-							<span id="numberOfGuests"></span>
-							people
-						</h2>
-						
-					</div>
-
-					<button id="backButton" class="btn btn-secondary marg">Go back</button>
+      <div class="border-bottom">
+         <button id="backButton" class="btn btn-outline-dark floatRight">Go back</button>		
+         <h2>
+            My dinner:
+            <span id="numberOfGuests"></span>
+            people
+         </h2>
 		</div>
-		<div id="menuGallery"></div>
-		<div>
+		<div class="text-center" id="menuGallery"></div>
+		<div class="text-center">
 			<button class="btn btn-secondary">Print full recipe</button>
 		</div>
       `;

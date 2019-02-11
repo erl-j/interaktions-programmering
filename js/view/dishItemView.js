@@ -4,11 +4,13 @@ class DishItemView {
         this.model = model;
 
         this.container.innerHTML = `
-        <div class>
+        <div class="border border-dark">
             
             <div id="dishCard" class="img-fluid"></div>
 
-            <span id="dishName"></span>
+            <h6 class="text-center pt-2">
+                <span  id="dishName"></span>
+            </h6>
 
         </div>
         `;
@@ -26,6 +28,9 @@ class DishItemView {
         let dshName = dsh.name;
         let imStr = dsh.image;
         this.dishImage.innerHTML = "<img src=\"images/" + imStr + "\"/>";
+        if(dshName.length>17){
+            dshName=dshName.substring(0,13)+"...";
+        }
         this.dishName.innerHTML = dshName;
     }
 

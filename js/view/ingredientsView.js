@@ -5,22 +5,21 @@ class IngredientsView {
         this.model = model;
 
         this.container.innerHTML = `
-        <div class="panel panel_default">
-            <div class="panel-body">
-                Ingredients for <span id="numberOfGuests"></span> people
-                <table class="table table-dark">
-                    <tbody id="ingredientEntries"></tbody>
-                    <tfoot>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>SEK</td>
-                            <td id="totalCost"></td>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
+        <div class="ml-2 mr-2">
+            <h4>
+            Ingredients for <span id="numberOfGuests"></span> people
+            </h4>
+            <table class="table border">
+                <tbody id="ingredientEntries"></tbody>
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td id="totalCost"></td>
+                    </tr>
+                </tfoot>
+            </table>
         </div>
         `;
 
@@ -54,7 +53,6 @@ class IngredientsView {
                     <td>` + i.quantity + `</td>
                     <td>` + i.unit + `</td>
                     <td>` + i.name + `</td>
-                    <td>SEK</td>
                     <td>` + i.price * nGuests + `</td>
                 </tr>              
                 `;
