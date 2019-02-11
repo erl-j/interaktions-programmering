@@ -10,6 +10,12 @@ class SelectDishView {
 					<h4>Find a dish</h4>
 					<div class="input-group">
 						<input id="searchTerms" placeholder="Enter key words"></input>
+						<select id="dropdown" class="btn btn-outline-dark">
+							<option value="all">all</option>
+							<option value="starter">starter</option>
+							<option value="main dish">main dish</option>
+							<option value="dessert">dessert</option>
+					  </select> 
 					</div>
 				</div>
 				<div class="scrollable" id="gallery"></div>
@@ -19,6 +25,7 @@ class SelectDishView {
 		//this.dropdown = container.querySelector("#dropdown");
 		this.searchButton = container.querySelector("#searchButton");
 		this.searchTerms = container.querySelector("#searchTerms");
+		this.dropdown=container.querySelector("#dropdown");
 
 		this.gallery = container.querySelector("#gallery");
 		this.galleryDishes = [];
@@ -56,23 +63,32 @@ class SelectDishViewController {
 		
 
 		var searchAction = () => {
-			view.setGallery(model.searchDishes(view.searchTerms.value));
+			let results;
+			let type=view.dropdown.value;
+			console.log(view.dropdown.value);
+			if(type=="all"){
+				results=model.searchDishes(view.searchTerms.value);
+			}
+			else{
+				results=model.getAllDishes(type,view.searchTerms.value);
+				console.log(results);
+
+			}
+			view.setGallery(results);
 		};
 
 		view.gallery.addEventListener("load",searchAction());
 
+		//bad idea with shared api key,
 		// view.searchButton.addEventListener("click",
 		// 	() => searchAction());
 
-		 view.searchTerms.addEventListener("keypress",
-		 	() => searchAction());
-
-		// view.container.addEventListener("keypress",
-		// 	(e) => {
-		// 		if(e.keyCode==13){
-		// 			searchAction();
-		// 		}
-		// 	});
+		view.container.addEventListener("keypress",
+			(e) => {
+				if(e.keyCode==13){
+					searchAction();
+				}
+			});
 
 		view.gallery.addEventListener('click', function (event) {
 			if (event.target.tagName == "IMG") {
