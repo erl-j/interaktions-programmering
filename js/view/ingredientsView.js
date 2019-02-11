@@ -38,6 +38,7 @@ class IngredientsView {
 
     set(id) {
         this.id = id;
+        this.update();
     }
 
     update() {
