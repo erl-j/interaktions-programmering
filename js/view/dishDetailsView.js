@@ -13,9 +13,6 @@ class DishDetailsView {
                 <div id="dishImage" class="floatRight"></div>
                 <span id="dishDescription"></span>
             </p>
-
-
-
                 <button id="addButton" class="btn btn-secondary">add to menu</button>
                 <button id="backButton" class="btn btn-secondary">back to search</button>
         </div>
@@ -46,16 +43,12 @@ class DishDetailsView {
     }
 
     update() {
-
         if (this.id != null) {
-
-            let dsh = this.model.getDish(this.id);
-
-            this.dishTitle.innerHTML = dsh.name;
-
-            this.dishImage.innerHTML = "<img src=\"images/" + dsh.image + "\"/>";
-
-            this.dishDescription.innerHTML = dsh.description;
+            this.model.getDish(this.id).then(dsh => {
+                this.dishTitle.innerHTML = dsh.title;
+                this.dishImage.innerHTML = "<img class='forceRatio' src=\"" + dsh.image + "\"/>";
+                this.dishDescription.innerHTML = dsh.instructions;
+            })
         }
     }
 

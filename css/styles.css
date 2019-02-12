@@ -10,6 +10,11 @@ html,body{
 
 }
 
+.forceRatio{
+    width:150px;
+    height:150px;
+}
+
 .description{
     color:darkgray;
     position: absolute;

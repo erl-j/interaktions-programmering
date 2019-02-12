@@ -24,14 +24,10 @@ class IngredientsView {
         `;
 
         this.numberOfGuests = container.querySelector("#numberOfGuests");
-
         this.ingredientEntries = container.querySelector("#ingredientEntries");
-
         this.totalCost = container.querySelector("#totalCost");
 
         this.id = null;
-
-        this.update();
 
     }
 
@@ -41,26 +37,23 @@ class IngredientsView {
     }
 
     update() {
-        if (this.id != null) {
+        this.ingredientEntries.innerHTML = "";
+        if (this.id) {
             let nGuests = this.model.getNumberOfGuests();
-            this.numberOfGuests.innerHTML = nGuests;
-            let dsh = this.model.getDish(this.id);
-            this.ingredientEntries.innerHTML = (function () {
-                let out = "";
-                for (let i of dsh.ingredients) {
-                    out += `
-                <tr>
-                    <td>` + i.quantity + `</td>
+            this.model.getIngredients(this.id)
+                .then(ings => {
+                    this.totalCost.innerHTML = ings.length;
+                    ings.forEach(i => {
+                        console.log(i.name);
+                        this.ingredientEntries.innerHTML += `<tr>
+                    <td>` + i.amount.toFixed(2) + `</td>
                     <td>` + i.unit + `</td>
                     <td>` + i.name + `</td>
-                    <td>` + i.price * nGuests + `</td>
-                </tr>              
-                `;
-                }
-                return out;
-            })();
-
-            this.totalCost.innerHTML = this.model.getDishPrice(this.id);
+                    <td>` + 1 * nGuests + `</td>
+                </tr>`;
+                    })
+                });
+            this.numberOfGuests.innerHTML = nGuests;
         }
     }
 

@@ -11,7 +11,7 @@ class SelectDishView {
 					<div class="input-group">
 						<input id="searchTerms" placeholder="Enter key words"></input>
 						<select id="dropdown" class="btn btn-outline-dark">
-							<option value="all">all</option>
+							<option value="">all</option>
 							<option value="starter">starter</option>
 							<option value="main dish">main dish</option>
 							<option value="dessert">dessert</option>
@@ -37,7 +37,7 @@ class SelectDishView {
 		let i = 0;
 		for (let d of this.galleryDishes) {
 			this.gallery.innerHTML += ("<div class=\"imageBox\" id=\"dishItem" + i + "\" value=" + d.id + "></div>");
-			this.dishItemViews.push(new DishItemView(this.container.querySelector("#dishItem" + i), this.model, d.id));
+			this.dishItemViews.push(new DishItemView(this.container.querySelector("#dishItem" + i), this.model, {name:d.title,image:d.image}));
 			i++;
 		}
 	}
@@ -45,7 +45,6 @@ class SelectDishView {
 	setGallery(dishes) {
 		this.galleryDishes = dishes;
 		this.update();
-
 	}
 
 	hide() {
@@ -59,29 +58,13 @@ class SelectDishView {
 
 class SelectDishViewController {
 	constructor(view, model, gsc) {
-
-		
-
 		var searchAction = () => {
-			let results;
 			let type=view.dropdown.value;
-			console.log(view.dropdown.value);
-			if(type=="all"){
-				results=model.searchDishes(view.searchTerms.value);
-			}
-			else{
-				results=model.getAllDishes(type,view.searchTerms.value);
-				console.log(results);
-
-			}
-			view.setGallery(results);
-		};
+			model.getAllDishes(type,view.searchTerms.value).then(dishes=>view.setGallery(dishes)
+		);
+		}
 
 		view.gallery.addEventListener("load",searchAction());
-
-		//bad idea with shared api key,
-		// view.searchButton.addEventListener("click",
-		// 	() => searchAction());
 
 		view.container.addEventListener("keypress",
 			(e) => {
