@@ -10,9 +10,9 @@ Interaction Programing - Lab assignment 1+2- HTML
 
 # TODO:
 
--Implement category search on select dish
+-~~ImplEment category search on select dish~~
 
--Implement dinner printout view/screen.
+-~~iMplement printout view/screen.~~
 
--Fix layout. Learn basic CSS and make it look decent. Mobile too.
+-~~Fix layout. Learn basic CSS and make it look decent. Mobile too.~~
 
