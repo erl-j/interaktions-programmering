@@ -39,24 +39,28 @@ class DinnerSummaryView {
 		this.minusButton = container.querySelector("#minusGuest");
 		this.confirmDinnerButton = container.querySelector("#confirmDinner");
 		this.dishList = container.querySelector("#dishList");
-
 		this.update();
 	}
 
 	update() {
-		this.numberOfGuests.innerHTML = this.model.getNumberOfGuests();
-		this.totalCost.innerHTML = this.model.getTotalMenuPrice();
+		let nGuests=this.model.getNumberOfGuests();
+		this.numberOfGuests.innerHTML = nGuests;
+		//this.model.getTotalMenuPrice().then(price=>this.totalCost.innerHTML=price);
 
+		let totalCost=0;
 		this.dishList.innerHTML = (
 			function (model) {
 				let out = "";
 				let fullMenu = model.getFullMenu();
 				for (let d of fullMenu) {
-					out += "<tr><td>" + d['name'] + "</td><td>" + model.getDishPrice(d["id"]) + "</td></tr>";
+					let cost=d.extendedIngredients.length*nGuests;
+					totalCost+=cost;
+					out += "<tr><td>" + d.title + "</td><td>" + cost + "</td></tr>";
 				}
 				return out;
+			})(this.model);
 
-			})(this.model);;
+			this.totalCost.innerHTML=totalCost;
 	}
 
 	hide() {

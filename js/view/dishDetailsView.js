@@ -59,8 +59,8 @@ class DishDetailsViewController {
     constructor(view, model, gsc) {
         view.backButton.addEventListener("click", () => gsc.showSelectDishScreen());
         view.addButton.addEventListener("click", () => {
-            model.addDishToMenu(view.id);
-            gsc.showSelectDishScreen();
+            model.addDishToMenu(view.id).then(gsc.showSelectDishScreen());
+            
         });
     }
 

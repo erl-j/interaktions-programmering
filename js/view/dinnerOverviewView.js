@@ -35,9 +35,8 @@ class DinnerOverviewView {
 
       let i = 0;
       for (let d of fullMenu) {
-         let id = d.id;
          this.menuGallery.innerHTML += ("<div class=\"imageBox\" id=\"dishItem" + i + "\"></div>");
-         this.dishItemViews.push(new DishItemView(this.container.querySelector("#dishItem" + i), this.model, id));
+         this.dishItemViews.push(new DishItemView(this.container.querySelector("#dishItem" + i), this.model, {name:d.title,image:d.image}));
          i++;
       }
    }

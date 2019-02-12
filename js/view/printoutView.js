@@ -15,20 +15,22 @@ class PrintoutView {
     }
 
     update() {
+        this.dishList.innerHTML="loading dishes";
+
         this.dishList.innerHTML = (() => {
             let out = "";
             let fullMenu = this.model.getFullMenu();
             for (let dsh of fullMenu) {
                     out += `
                     <div>
-                        <img src="images/` + dsh.image + `"></img>
+                        <img class="forceRatio" src="` + dsh.image + `"></img>
                         <div>
-                            <h4>` + dsh.name + `</h4>
-                            <p>` + dsh.description + `</p>
+                            <h4>` + dsh.title + `</h4>
+                            <p>` + dsh.instructions + `</p>
                         </div>
                         <div>
                             <h4>Preparation</h4>
-                            <p>` + dsh.description + `</p>
+                            <p>` + dsh.instructions + `</p>
                         </div>
                     </div>
                     `;
