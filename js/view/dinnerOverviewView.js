@@ -14,13 +14,14 @@ class DinnerOverviewView {
 		</div>
 		<div class="text-center" id="menuGallery"></div>
 		<div class="text-center">
-			<button class="btn btn-secondary">Print full recipe</button>
+			<button id="printoutButton" class="btn btn-secondary">Print full recipe</button>
 		</div>
       `;
 
       this.backButton=this.container.querySelector("#backButton");
       this.numberOfGuests = this.container.querySelector("#numberOfGuests");
       this.menuGallery = this.container.querySelector("#menuGallery");
+      this.printoutButton=this.container.querySelector("#printoutButton");
 
       this.update();
    }
@@ -55,5 +56,6 @@ class DinnerOverviewViewController{
    constructor(view,model,gsc){
       view.backButton.addEventListener("click",()=>gsc.showSelectDishScreen());
 
+      view.printoutButton.addEventListener("click",()=>gsc.showPrintoutScreen());
    }
 }

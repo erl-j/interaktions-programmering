@@ -18,6 +18,9 @@ class GSC{
 		this.dinnerOverviewView = new DinnerOverviewView(document.querySelector("#dinnerOverviewView"),this.model);
 		this.model.addObserver(this.dinnerOverviewView);
 
+		this.printoutView=new PrintoutView(document.querySelector("#printoutView"),this.model);
+		this.model.addObserver(this.printoutView);
+		
 		this.initalizeControllers();
 	}
 
@@ -36,6 +39,7 @@ class GSC{
 		this.selectDishView.hide();
 		this.dishDetailsView.hide();
 		this.dinnerOverviewView.hide();
+		this.printoutView.hide();
 	}
 
 	showHomeScreen(){
@@ -61,6 +65,11 @@ class GSC{
 	showDinnerOverviewScreen(){
 		this.hideAllViews();
 		this.dinnerOverviewView.show();
+	}
+
+	showPrintoutScreen(){
+		this.hideAllViews();
+		this.printoutView.show();
 	}
 }
 
