@@ -20,7 +20,7 @@ class DinnerModel {
 					'X-Mashape-Key': API_KEY
 				}
 			})
-			.then(response => response.json());
+			.then(response => response.json())
 	}
 
 	setNumberOfGuests(num) {

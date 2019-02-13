@@ -13,8 +13,17 @@ class SelectDishView {
 						<select id="dropdown" class="btn btn-outline-dark">
 							<option value="">all</option>
 							<option value="starter">starter</option>
-							<option value="main dish">main dish</option>
+							<option value="main course">main course</option>
 							<option value="dessert">dessert</option>
+							<option value="side dish">side dish</option>
+							<option value="appetizer">appetizer</option>
+							<option value="salad">salad</option>
+							<option value="bread">bread</option>
+							<option value="breakfast">breakfast</option>
+							<option value="soup">soup</option>
+							<option value="beverage">beverage</option>
+							<option value="sauce">sauce</option>
+							<option value="drink">drink</option>	
 					  </select> 
 					</div>
 				</div>
@@ -37,7 +46,7 @@ class SelectDishView {
 		let i = 0;
 		for (let d of this.galleryDishes) {
 			this.gallery.innerHTML += ("<div class=\"imageBox\" id=\"dishItem" + i + "\" value=" + d.id + "></div>");
-			this.dishItemViews.push(new DishItemView(this.container.querySelector("#dishItem" + i), this.model, {name:d.title,image:d.image}));
+			this.dishItemViews.push(new DishItemView(this.container.querySelector("#dishItem" + i), this.model, {name:d.title,image:d.image,id:d.id}));
 			i++;
 		}
 	}
@@ -62,7 +71,7 @@ class SelectDishViewController {
 			view.gallery.innerHTML="<h3>loading dishes...</h3>";
 			model.getAllDishes(view.dropdown.value,view.searchTerms.value)
 			.then(dishes=>view.setGallery(dishes)
-			.catch(error=>this.gallery.innerHTML="network error")
+			.catch(error=>console.log("ERROR IN SELECT DISH"))
 		);
 		}
 
@@ -74,12 +83,29 @@ class SelectDishViewController {
 					searchAction();
 				}
 			});
+		
+		view.dropdown.addEventListener("change",searchAction);
+
+		let findElementValue=function(element,depth){
+			let value = element.getAttribute("value");
+				if(depth==0){
+					return undefined;
+				}
+				if(value){
+					return value;
+				}
+				else{
+					return findElementValue(element.parentElement,depth-1);
+				}
+
+		}
 
 		view.gallery.addEventListener('click', function (event) {
-			if (event.target.tagName == "IMG") {
-				let imId = event.target.parentElement.parentElement.parentElement.getAttribute("value");
-				gsc.showDishDetailsScreen(imId);
-			}
+				let imId=findElementValue(event.target,3);
+				if(imId){
+					gsc.showDishDetailsScreen(imId);
+				}		
+			
 		});
 
 	}

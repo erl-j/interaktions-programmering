@@ -15,7 +15,6 @@ class PrintoutView {
     }
 
     update() {
-        this.dishList.innerHTML="loading dishes";
 
         this.dishList.innerHTML = (() => {
             let out = "";
