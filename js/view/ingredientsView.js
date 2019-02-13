@@ -43,7 +43,7 @@ class IngredientsView {
             this.model.getIngredients(this.id)
                 .then(ings => {
                     this.ingredientEntries.innerHTML="";
-                    this.totalCost.innerHTML = ings.length;
+                    this.totalCost.innerHTML = ings.length*nGuests;
                     ings.forEach(i => {
                         this.ingredientEntries.innerHTML += `<tr>
                     <td>` + i.amount.toFixed(2) + `</td>

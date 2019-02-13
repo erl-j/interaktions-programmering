@@ -59,8 +59,10 @@ class SelectDishView {
 class SelectDishViewController {
 	constructor(view, model, gsc) {
 		var searchAction = () => {
-			let type=view.dropdown.value;
-			model.getAllDishes(type,view.searchTerms.value).then(dishes=>view.setGallery(dishes)
+			view.gallery.innerHTML="<h3>loading dishes...</h3>";
+			model.getAllDishes(view.dropdown.value,view.searchTerms.value)
+			.then(dishes=>view.setGallery(dishes)
+			.catch(error=>this.gallery.innerHTML="network error")
 		);
 		}
 

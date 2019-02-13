@@ -43,12 +43,14 @@ class DishDetailsView {
     }
 
     update() {
+        this.dishTitle.innerHTML="Loading...";
+        this.dishDescription.innerHTML="Loading...";
         if (this.id != null) {
             this.model.getDish(this.id).then(dsh => {
                 this.dishTitle.innerHTML = dsh.title;
                 this.dishImage.innerHTML = "<img class='forceRatio' src=\"" + dsh.image + "\"/>";
                 this.dishDescription.innerHTML = dsh.instructions;
-            })
+            }).catch(error=>this.dishTitle.innerHTML="COULDN'T REACH API")
         }
     }
 
