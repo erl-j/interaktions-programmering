@@ -12,7 +12,7 @@ class DinnerModel {
 	}
 
 	request(queryStr) {
-		let base_url = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/";
+		let base_url = "http://sunset.nada.kth.se:8080/iprog/group/73/";
 		let url = base_url + queryStr;
 		console.log(url);
 		return fetch(url, {
